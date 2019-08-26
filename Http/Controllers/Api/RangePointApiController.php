@@ -145,7 +145,13 @@ class RangePointApiController extends BaseApiController
 
       $params = $this->getParamsRequest($request);
 
-      $rangePoint = $this->rangePoint->updateBy($criteria,$data,$params);
+      // Search entity
+      $entity = $this->rangePoint->getItem($criteria,$params);
+
+      //Break if no found item
+      if (!$entity) throw new \Exception('Item not found', 204);
+
+      $rangePoint = $this->rangePoint->update($entity,$data);
 
       $response = ['data' => new RangePointTransformer($rangePoint)];
 
@@ -176,7 +182,13 @@ class RangePointApiController extends BaseApiController
       //Get params
       $params = $this->getParamsRequest($request);
 
-      $this->rangePoint->deleteBy($criteria,$params);
+      // Search entity
+      $entity = $this->rangePoint->getItem($criteria,$params);
+
+      //Break if no found item
+      if (!$entity) throw new \Exception('Item not found', 204);
+
+      $this->rangePoint->destroy($entity);
 
       $response = ['data' => 'Item deleted'];
 

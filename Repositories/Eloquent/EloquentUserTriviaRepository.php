@@ -83,58 +83,5 @@ class EloquentUserTriviaRepository extends EloquentBaseRepository implements Use
 
     }
 
-    public function updateBy($criteria, $data, $params = false){
-
-        // INITIALIZE QUERY
-        $query = $this->model->query();
-    
-        /*== FILTER ==*/
-        if (isset($params->filter)) {
-          $filter = $params->filter;
-
-          //Update by field
-          if (isset($filter->field))
-            $field = $filter->field;
-        }
-
-        /*== REQUEST ==*/
-        $model = $query->where($field ?? 'id', $criteria)->first();
-    
-    
-        if($model){
-    
-          $model->update($data);
-          
-        
-        }
-    
-        return $model ?? false;
-    }
-
-    public function deleteBy($criteria, $params = false)
-    {
-      // INITIALIZE QUERY
-      $query = $this->model->query();
-  
-      /*== FILTER ==*/
-      if (isset($params->filter)) {
-        $filter = $params->filter;
-
-        if (isset($filter->field))//Where field
-          $field = $filter->field;
-      }
-  
-       /*== REQUEST ==*/
-      $model = $query->where($field ?? 'id', $criteria)->first();
-     
-      if($model) {
-
-        $model->delete();
-
-      }else{
-        return false;
-      }
-
-    }
 
 }
