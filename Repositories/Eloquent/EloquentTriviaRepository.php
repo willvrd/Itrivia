@@ -61,6 +61,11 @@ class EloquentTriviaRepository extends EloquentBaseRepository implements TriviaR
           $query->orderBy($orderByField, $orderWay);//Add order to query
         }
 
+        //add filter by trivia_id
+        if (isset($filter->triviaId)){
+          $query->where('id', $filter->triviaId);
+        }
+
       }
 
       /*== FIELDS ==*/

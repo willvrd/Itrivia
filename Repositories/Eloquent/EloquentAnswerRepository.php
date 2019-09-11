@@ -61,6 +61,11 @@ class EloquentAnswerRepository extends EloquentBaseRepository implements AnswerR
           $query->orderBy($orderByField, $orderWay);//Add order to query
         }
 
+        //add filter by questionId
+        if (isset($filter->questionId)){
+          $query->where('question_id', $filter->questionId);
+        }
+
       }
 
       /*== FIELDS ==*/
