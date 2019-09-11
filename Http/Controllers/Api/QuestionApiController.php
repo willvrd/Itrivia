@@ -145,7 +145,13 @@ class QuestionApiController extends BaseApiController
 
       $params = $this->getParamsRequest($request);
 
-      $question = $this->question->updateBy($criteria,$data,$params);
+      // Search entity
+      $entity = $this->question->getItem($criteria,$params);
+
+      //Break if no found item
+      if (!$entity) throw new \Exception('Item not found', 204);
+
+      $question = $this->question->update($entity,$data);
 
       $response = ['data' => new QuestionTransformer($question)];
 
@@ -176,7 +182,13 @@ class QuestionApiController extends BaseApiController
       //Get params
       $params = $this->getParamsRequest($request);
 
-      $this->question->deleteBy($criteria,$params);
+      // Search entity
+      $entity = $this->question->getItem($criteria,$params);
+
+      //Break if no found item
+      if (!$entity) throw new \Exception('Item not found', 204);
+
+      $this->question->destroy($entity);
 
       $response = ['data' => 'Item deleted'];
 

@@ -145,7 +145,13 @@ class TriviaApiController extends BaseApiController
 
       $params = $this->getParamsRequest($request);
 
-      $trivia = $this->trivia->updateBy($criteria,$data,$params);
+      // Search entity
+      $entity = $this->trivia->getItem($criteria,$params);
+
+      //Break if no found item
+      if (!$entity) throw new \Exception('Item not found', 204);
+
+      $trivia = $this->trivia->update($entity,$data);
 
       $response = ['data' => new TriviaTransformer($trivia)];
 
@@ -176,7 +182,13 @@ class TriviaApiController extends BaseApiController
       //Get params
       $params = $this->getParamsRequest($request);
 
-      $this->trivia->deleteBy($criteria,$params);
+      // Search entity
+      $entity = $this->trivia->getItem($criteria,$params);
+
+      //Break if no found item
+      if (!$entity) throw new \Exception('Item not found', 204);
+
+      $this->trivia->destroy($entity);
 
       $response = ['data' => 'Item deleted'];
 
