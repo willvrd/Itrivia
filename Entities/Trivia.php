@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 use Laracasts\Presenter\PresentableTrait;
 use Modules\Itrivia\Presenters\TriviaPresenter;
+use Modules\Media\Support\Traits\MediaRelation;
+use Modules\Media\Entities\File;
 
 class Trivia extends Model
 {
-    use Translatable,PresentableTrait;
+    use Translatable,PresentableTrait,MediaRelation;
 
     protected $table = 'itrivia__trivias';
 
@@ -58,6 +60,19 @@ class Trivia extends Model
       
         $this->attributes['options'] = json_encode($value);
       
+    }
+
+    public function getMainImageAttribute()
+    {
+        $thumbnail = $this->files()->where('zone', 'mainimage')->first();
+        if (!$thumbnail) return [
+        'mimeType' => 'image/jpeg',
+        'path' => url('modules/iblog/img/category/default.jpg')
+        ];
+        return [
+        'mimeType' => $thumbnail->mimetype,
+        'path' => $thumbnail->path_string
+        ];
     }
 
 

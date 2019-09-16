@@ -4,6 +4,10 @@ namespace Modules\Itrivia\Repositories\Eloquent;
 
 use Modules\Itrivia\Repositories\TriviaRepository;
 use Modules\Core\Repositories\Eloquent\EloquentBaseRepository;
+//Events media
+use Modules\Ihelpers\Events\CreateMedia;
+use Modules\Ihelpers\Events\UpdateMedia;
+use Modules\Ihelpers\Events\DeleteMedia;
 
 class EloquentTriviaRepository extends EloquentBaseRepository implements TriviaRepository
 {
@@ -122,6 +126,38 @@ class EloquentTriviaRepository extends EloquentBaseRepository implements TriviaR
 
 
       return $query->first();
+
+    }
+
+    public function create($data)
+    {
+
+      $trivia = $this->model->create($data);
+      
+      //Event to ADD media
+      event(new CreateMedia($trivia, $data));
+
+      return $trivia;
+
+    }
+
+    public function update($model,$data){
+
+      $model->update($data);
+
+       //Event to Update media
+      event(new UpdateMedia($model, $data));
+
+      return $model ?? false;
+
+    }
+
+    public function destroy($model){
+
+      $model->delete();
+
+      //Event to Delete media
+      event(new DeleteMedia($model->id, get_class($model)));
 
     }
 

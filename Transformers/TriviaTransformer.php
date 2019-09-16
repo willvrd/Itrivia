@@ -16,6 +16,7 @@ class TriviaTransformer extends Resource
       'endDate' => $this->when($this->end_date,$this->end_date),
       'status' => $this->when($this->status,$this->status),
       'statusName' => $this->when($this->present()->status,$this->present()->status),
+      'mainImage' => $this->mainImage,
       'options' => $this->when($this->options,$this->options),
       'questions' => QuestionTransformer::collection($this->whenLoaded('questions')),
       'userTrivias' => UserTriviaTransformer::collection($this->whenLoaded('userTrivias')),

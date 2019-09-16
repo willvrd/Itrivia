@@ -8,7 +8,8 @@
     "order": 1,
     "providers": [
         "Modules\\Itrivia\\Providers\\ItriviaServiceProvider",
-        "Modules\\Itrivia\\Providers\\RouteServiceProvider"
+        "Modules\\Itrivia\\Providers\\RouteServiceProvider",
+        "Modules\\Itrivia\\Providers\\EventServiceProvider"
     ],
     "aliases": {},
     "files": [

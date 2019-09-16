@@ -12,7 +12,8 @@ class AnswerTransformer extends Resource
     $item =  [
       'id' => $this->when($this->id,$this->id),
       'title' => $this->when($this->title,$this->title),
-      'correct' => $this->when(\Auth::check() && \Auth::user()->hasAccess(['itrivia.answers.create']) && $this->correct, $this->correct),
+      //'correct' => $this->when(\Auth::check() && \Auth::user()->hasAccess(['itrivia.answers.create']) && $this->correct, $this->correct),
+      'correct' => $this->when($this->correct,$this->correct),
       'question_id' => $this->when($this->question_id,$this->question_id),
       'question' => new QuestionTransformer($this->whenLoaded('question')),
       'userQuestionAnswers' => UserQuestionAnswerTransformer::collection($this->whenLoaded('userQuestionAnswers')),

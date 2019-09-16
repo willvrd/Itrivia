@@ -18,9 +18,11 @@ class Answer extends Model
         'correct'
     ];
 
+    /*
     protected $casts = [
         'correct' => 'boolean',
     ];
+    */
 
     public function question()
     {
