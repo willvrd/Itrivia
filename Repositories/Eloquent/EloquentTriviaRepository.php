@@ -70,6 +70,29 @@ class EloquentTriviaRepository extends EloquentBaseRepository implements TriviaR
           $query->where('id', $filter->triviaId);
         }
 
+        //Random
+        if (isset($filter->random)) {
+          $query->inRandomOrder();
+        }
+
+        //Get All Trivias where userId has voted
+        if (isset($filter->userId)) {
+          $userId = $filter->userId;
+          $query->whereHas('userTrivias',function ($q) use($userId){
+              $q->where('user_id',$userId);
+          });
+        }
+
+        //Get Trivias by id
+        if (isset($filter->include)) {
+          $query->whereIn('id', $filter->include);
+        }
+
+        //Get Trivias exclude
+        if (isset($filter->exclude)) {
+          $query->whereNotIn('id', $filter->exclude);
+        }
+
       }
 
       /*== FIELDS ==*/

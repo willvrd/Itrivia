@@ -49,6 +49,16 @@ class EloquentUserTriviaRepository extends EloquentBaseRepository implements Use
           $query->orderBy($orderByField, $orderWay);//Add order to query
         }
 
+         //add filter by user_id
+        if (isset($filter->userId)){
+          $query->where('user_id', $filter->userId);
+        }
+
+         //add filter by trivia_id
+        if (isset($filter->triviaId)){
+          $query->where('trivia_id', $filter->triviaId);
+        }
+
       }
 
       /*== FIELDS ==*/
