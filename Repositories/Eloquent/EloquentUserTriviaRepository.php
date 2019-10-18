@@ -91,6 +91,15 @@ class EloquentUserTriviaRepository extends EloquentBaseRepository implements Use
         $query->select($params->fields);
       }
      
+      // FILTER
+      if (isset($params->filter)) {
+        $filter = $params->filter;
+        if (isset($filter->field))
+            $field = $filter->field;
+      }
+      
+      $query->where($field ?? 'id', $criteria);
+
       return $query->first();
 
     }
