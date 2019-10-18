@@ -7,7 +7,7 @@ use Illuminate\Routing\Router;
  * Testing 'middleware' => ['api.token']
  */
 
-$router->group(['prefix' => '/answers'], function (Router $router) {
+$router->group(['prefix' => '/answers','middleware' => ['auth:api']], function (Router $router) {
   $locale = \LaravelLocalization::setLocale() ?: \App::getLocale();
   
   $router->post('/', [

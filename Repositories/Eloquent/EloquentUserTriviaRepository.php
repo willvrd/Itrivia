@@ -4,6 +4,8 @@ namespace Modules\Itrivia\Repositories\Eloquent;
 
 use Modules\Itrivia\Repositories\UserTriviaRepository;
 use Modules\Core\Repositories\Eloquent\EloquentBaseRepository;
+//Events
+use Modules\Itrivia\Events\UserTriviaWasCreated;
 
 class EloquentUserTriviaRepository extends EloquentBaseRepository implements UserTriviaRepository
 {
@@ -90,6 +92,18 @@ class EloquentUserTriviaRepository extends EloquentBaseRepository implements Use
       }
      
       return $query->first();
+
+    }
+
+    public function create($data)
+    {
+
+      $userTrivia = $this->model->create($data);
+      
+      //Event
+      event(new UserTriviaWasCreated($userTrivia, $data));
+
+      return $userTrivia;
 
     }
 
