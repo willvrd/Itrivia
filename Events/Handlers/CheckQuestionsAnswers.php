@@ -106,6 +106,7 @@ class CheckQuestionsAnswers
                 "pointable_id" => (int)$userTrivia->trivia_id,
                 "pointable_type" => $class,
                 "points" => (int)$sumPoints,
+                "type" => "trivia-completed",
                 "description" => trans("iredeems::common.settingsMsg.points-per-trivia")
             );
             $this->pointRepository->create($data);
