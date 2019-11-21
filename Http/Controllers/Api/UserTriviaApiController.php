@@ -108,9 +108,12 @@ class UserTriviaApiController extends BaseApiController
 
       //Create
       $userTrivia = $this->userTrivia->create($data);
+      
+      //Response
+      $response = ["data" => $userTrivia];
 
       //Response
-      $response = ["data" => new UserTriviaTransformer($userTrivia)];
+      //$response = ["data" => new UserTriviaTransformer($userTrivia)];
 
       \DB::commit(); //Commit to Data Base
 

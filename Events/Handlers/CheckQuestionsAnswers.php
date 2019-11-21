@@ -22,6 +22,9 @@ class CheckQuestionsAnswers
         $userTrivia = $event->userTrivia;
         $data = $event->data;
 
+        // Data to return
+        $inforResult = null;
+
         // Settings Iredeems
         $checkTrivia =  $this->setting->get('iredeems::points-per-finished-trivia-checkbox');
 
@@ -110,6 +113,16 @@ class CheckQuestionsAnswers
                 "description" => trans("iredeems::common.settingsMsg.points-per-trivia")
             );
             $this->pointRepository->create($data);
+
+            $inforResult = array(
+                'questionsTotal' => $totalQuestions, 
+                'userOkQuestions' => $qOk,
+                'questionsPercentCompleted' => $porcentComplete,
+                'rangePoints' => count($rangePoints) > 0 ? 1 : 0, // If Trivia Has range points
+                'pointsWinner' => $sumPoints
+            );
+
+            return $inforResult;
 
         }
 

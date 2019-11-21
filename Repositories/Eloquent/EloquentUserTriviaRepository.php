@@ -110,9 +110,12 @@ class EloquentUserTriviaRepository extends EloquentBaseRepository implements Use
       $userTrivia = $this->model->create($data);
       
       //Event
-      event(new UserTriviaWasCreated($userTrivia, $data));
+      $result = event(new UserTriviaWasCreated($userTrivia, $data));
 
-      return $userTrivia;
+      return $result;
+      //dd($result);
+
+      //return $userTrivia;
 
     }
 
