@@ -93,6 +93,11 @@ class EloquentTriviaRepository extends EloquentBaseRepository implements TriviaR
           $query->whereNotIn('id', $filter->exclude);
         }
 
+         //add filter by storeId
+        if (isset($filter->storeId)){
+          $query->where('store_id', $filter->storeId);
+        }
+
       }
 
       /*== FIELDS ==*/

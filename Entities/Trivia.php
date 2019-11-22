@@ -26,7 +26,8 @@ class Trivia extends Model
         'start_date',
         'end_date',
         'status',
-        'options'
+        'options',
+        'store_id'
     ];
 
     protected $fakeColumns = ['options'];

@@ -21,6 +21,8 @@ class CreateItriviaTriviasTable extends Migration
             $table->tinyInteger('status')->default(1)->unsigned();
             $table->text('options')->default('')->nullable();
 
+            $table->integer('store_id')->unsigned()->nullable();
+
             $table->timestamps();
         });
     }

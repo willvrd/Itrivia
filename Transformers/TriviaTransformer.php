@@ -14,6 +14,7 @@ class TriviaTransformer extends Resource
       'description' => $this->when($this->description,$this->description),
       'startDate' => $this->when($this->start_date,$this->start_date),
       'endDate' => $this->when($this->end_date,$this->end_date),
+      'storeId' => $this->when($this->store_id,$this->store_id),
       'status' => $this->when($this->status,$this->status),
       'statusName' => $this->when($this->present()->status,$this->present()->status),
       'mainImage' => $this->mainImage,
